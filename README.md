@@ -4,21 +4,20 @@ This code example uses the signal to user LED1, which switches depending on the 
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-ce240927-tcpwm-counter-smartio)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDA3NzYiLCJTcGVjIE51bWJlciI6IjAwMi00MDc3NiIsIkRvYyBUaXRsZSI6IlBETDogVENQV00gY291bnRlciB1c2luZyBTbWFydCBJL08iLCJyaWQiOiJnc2hpIiwiRG9jIHZlcnNpb24iOiIxLjAuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJBVVRPIiwiRG9jIEZhbWlseSI6IkFVVE8gTUNVIn0=)
+[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDA3NzYiLCJTcGVjIE51bWJlciI6IjAwMi00MDc3NiIsIkRvYyBUaXRsZSI6IlBETDogVENQV00gY291bnRlciB1c2luZyBTbWFydCBJL08iLCJyaWQiOiJnby5zaGltYWRhQGluZmluZW9uLmNvbSIsIkRvYyB2ZXJzaW9uIjoiMS4xLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiQVVUTyIsIkRvYyBGYW1pbHkiOiJBVVRPIE1DVSJ9)
 
 
 ## Requirements
 
-- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.2 or later (tested with v3.2)
-- Board support package (BSP) minimum required version for:
-  - [KIT_T2G_C-2D-6M_LITE](https://www.infineon.com/cms/en/product/evaluation-boards/kit_t2g_c-2d-6m_lite/): v1.0
+- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.6 or later (tested with v3.6)
+- Board support package (BSP) minimum required version 3.0.0
 - Programming language: C
-- Associated parts: [TRAVEO&trade; T2G family Cluster series](https://www.infineon.com/cms/en/product/microcontroller/32-bit-traveo-t2g-arm-cortex-microcontroller/32-bit-traveo-t2g-arm-cortex-for-cluster/)
+- Associated parts: [TRAVEO&trade; T2G family Cluster series](https://www.infineon.com/cms/en/product/microcontroller/32-bit-traveo-t2g-arm-cortex-microcontroller/32-bit-traveo-t2g-arm-cortex-for-cluster/), [TRAVEO&trade; T2G family body high CYT4BF series](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-body/t2g-cyt4bf)
 
 
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
-- GNU Arm&reg; Embedded Compiler v11.3.1 (`GCC_ARM`) – Default value of `TOOLCHAIN`
+- GNU Arm&reg; Embedded Compiler v14.2.1 (`GCC_ARM`) – Default value of `TOOLCHAIN`
 - Arm&reg; Compiler v6.22 (`ARM`)
 - IAR C/C++ Compiler v9.50.2 (`IAR`)
 
@@ -26,19 +25,29 @@ This code example uses the signal to user LED1, which switches depending on the 
 ## Supported kits (make variable 'TARGET')
 
 
-- [TRAVEO&trade; T2G Cluster 6M Lite Kit](https://www.infineon.com/cms/en/product/evaluation-boards/kit_t2g_c-2d-6m_lite/) (`KIT_T2G_C-2D-6M_LITE`) – Default value of `TARGET`
+- [TRAVEO&trade; T2G Cluster 6M Lite Kit](https://www.infineon.com/cms/en/product/evaluation-boards/kit_t2g_c-2d-6m_lite/) (`KIT_T2G_C-2D-6M_LITE`) – Default value of `TARGET`<br>
+- [TRAVEO&trade; T2G Cluster 4M Lite Kit](https://www.infineon.com/evaluation-board/KIT-T2G-C-2D-4M-LITE) (`KIT_T2G_C-2D-4M_LITE`)<br>
+- [TRAVEO&trade; T2G Body high Lite Kit](https://www.infineon.com/evaluation-board/KIT-T2G-B-H-LITE) (`KIT_T2G-B-H_LITE`)<br>
+- [TRAVEO&trade; T2G Body high Evaluation Kit](https://www.infineon.com/evaluation-board/KIT-T2G-B-H-EVK) (`KIT_T2G-B-H_EVK`)
+
 
 
 ## Hardware setup
 
-This example uses the board's default configuration. See the kit user guide to ensure that the board is configured correctly.
+This example needs to connect pins to LED1 and LED2 with jumper wires. **Table 1** shows connection jumper pin.
 
+**Table 1. Connection jumper pin**
+
+ Board                     |  Jumper setting                  | Waveform observation pin           | Confiramtion
+ :-------                  | :-----------------------------   | :------------  | :------------  
+ KIT_T2G_C-2D-6M_LITE      | -                                | -              | USER_LED1, USER_LED2  
+ KIT_T2G_C-2D-4M_LITE      | -                                | P9[5], P9[6]   | Osilloscope  
+ KIT_T2G-B-H_LITE          | P13.5 - P5.0, P13.6 - P5.1       | -              | USER_LED1, USER_LED2           
+ KIT_T2G-B-H_EVK           | P13.5 - P16.1, P13.6 - P16.2     | -              | USER_LED1, USER_LED2  
 
 ## Software setup
 
 See the [ModusToolbox&trade; tools package installation guide](https://www.infineon.com/ModusToolboxInstallguide) for information about installing and configuring the tools package.
-
-Install a terminal emulator if you don't have one. Instructions in this document use [Tera Term](https://teratermproject.github.io/index-en.html).
 
 This example requires no additional software or tools.
 
@@ -159,9 +168,7 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
 
 1. Connect the board to your PC using the provided USB cable through the KitProg3 USB connector.
 
-2. Open a terminal program and select the KitProg3 COM port. Set the serial port parameters to 8N1 and 115200 baud.
-
-3. Program the board using one of the following:
+2. Program the board using one of the following:
 
    <details><summary><b>Using Eclipse IDE</b></summary>
 
@@ -190,8 +197,14 @@ For more details, see the [ModusToolbox&trade; tools package user guide](https:/
       ```
    </details>
 
-4. After successful programming, observe that the user LED1 and LED2 blink alternately.
+3. After successful programming, observe that the USER_LED1 and USER_LED2 blink alternately or waveform on osilloscope. 
 
+   **Note:** for Cluster 2D 4M. KIT_T2G_C-2D_LITE can only observe by waveform, not LEDs. The waveform is Figure.1
+   
+    **Figure 1.  The wafeform on osilloscope**
+
+   <img src="images/waveform.png" width="800" height="600" />
+   
 
 ## Debugging
 
@@ -215,73 +228,90 @@ Follow the instructions in your preferred IDE.
 
 ## Design and implementation
 
-This design consists of the TCPWM counter, PWM, and user LED resources. Configure the PWM work with 25 MHz and output the PWM wave to the start counter. The counter work with 200 kHz and 60000 period value. Enable the CC0 and CC0 compare function and enable the CC0 match interrupt. It will generate an interrupt to toggle the user LED1 when counter up to CC0 match value 50000. Configure the user LED1 pin as strong drive and output mode to indicate the counter CC0 match interrupt.
-Additionally, this design uses the Smart I/O resource to connect a signal of this user LED1 input pin to the Smart I/O output pin to toggle a user LED2, the connection is implemented using the LUTs of the Smart I/O resource.
-
-**Figure 1. Counter setting**
-
-![](images/counter.png)
-   
-**Figure 2. PWM setting**
-
-![](images/pwm1.png)
-
-![](images/pwm2.png)	
-
-**Figure 3** shows the connection from I/O port of the signal of user LED1 to the Smart I/O output port. LUT [6] is used for this use case.
-
-**Figure 3. Smart I/O connection diagram**
-
-![](images/smartio_connection.png)
-
-
 ### Resources and settings
 
-**Table 1. Application resources**
+This design consists that the PWM periodically triggers the TCPWM counter. When the TCPWM counter reaches a certain value, it inverts the counter value. it is input to the smart I/O. And it generates USER_LED1 and USER_LED2. USER_LED2 is invert of USER_LED1.
+
+**Figure 2** shows the Smart I/O connection from TCPWM output to the Smart I/O output port.
+The connection is implemented using the LUTs of the Smart I/O resource.
+
+**Figure 2. Smart I/O connection diagram**
+
+![](images/smartio_con.png)
+
+ **Table 2** shows each resource.
+
+**Table 2. Application resources**
 
  Resource                      |  Alias/object          |    Purpose
  :-------                      | :------------          | :------------
  PWM (PDL)                     | TCPWM PWM              | PWM output line signal to start counter
  COUNTER (PDL)                 | TCPWM Counter          | Counter work at 200 kHz clock frequency
- GPIO (PDL)                    | CYBSP_USER_LED1        | User LED1 to show the counter CC0 match interrupt
  TCPWM counter value input pin | SMART_IO_INPUT_PIN     | Change the input logic level
- Smart I/O                     | smart_io               | Implements TCPWM counter signal value connection logic
- Digital output pin            | SMART_IO_OUTPUT_PIN    | Display output state using the user LED2
+ Smart I/O                     | SMART_IO               | Implements TCPWM counter signal value connection logic
+ Smart I/O output pin            | SMART_IO_OUTPUT_PIN    | Display output state using the USER_LED1 and USER_LED2
+
+<br>
+The following shows the configuration for each.
 
 <br>
 
-**Figure 4. Enabling Smart I/O**
+**Figure 3** shows PWM setting.
+The PWM works with 10 MHz and 9999 period value. It output the trigger 0 signal to start TCPWM counter.
+
+**Figure 3. PWM setting**
+
+![](images/pwm1.png)
+
+![](images/pwm2.png)	
+
+**Figure 4** shows TCPWM counter setting.
+ The TCPWM counter works with 200 kHz and 60000 period value. Enable the CC0 compare function and enable the CC0 match interrupt. It will generate an interrupt to toggle the TCPWM counter value when counter up to CC0 match value 50000. 
+
+**Figure 4. Counter setting**
+
+![](images/counter.png)
+
+
+The TCPWM counter value is input to smart IO, which output to Smart I/O output pin.
+**Figure 5** shows enableing smart I/O and pin settings. This sets up the enableing smart I/O and the pin to be used in smart I/O.
+
+**Figure 5. Enabling Smart I/O**
 
 ![](images/enabling_smartio.png)
 
+**Figure 6** shows routing configurations. This sets up the routing connections for smart I/O. I/O6 and I/O5 are output. Chip5 is the TCPWM counter value. LUT5 and LUT6 is logic. And make the clock active.
 
-**Figure 5. Smart I/O routing configuration**
+**Figure 6. Smart I/O routing configuration**
 
 ![](images/smartio_routing_configuration.png)
 
 
-**Figure 6** shows LUT6 configuration settings. 
+**Figure 7** shows LUT5 configurations. And **Figure 8** shows LUT6 configurations. This sets up the logic for smart I/O.
 
-**Figure 6. LUT configuration**
+**Figure 7. Smart I/O LUT5 configuration**
 
-![](images/lut_configuration.png)
+![](images/lut5_configuration.png)
 
+**Figure 8. Smart I/O LUT6 configuration**
 
+![](images/lut6_configuration.png)
 
-**Figure 7** shows the peripheral clock configuration for Smart I/O resources.
+**Figure 9** shows the peripheral clock configuration for Smart I/O resources. The clock is 200KHz.
 
-**Figure 7. Peripheral clock configuration for Smart I/O**
+**Figure 9. Peripheral clock configuration for Smart I/O**
 
 ![](images/peripheral_clock_configuration.png)
+
 
 
 ## Related resources
 
 Resources  | Links
 -----------|----------------------------------
-Application notes  | [AN235305](https://www.infineon.com/dgdl/?fileId=8ac78c8c8b6555fe018c1fddd8a72801) – Getting started with TRAVEO&trade; T2G family MCUs in ModusToolbox&trade; <br> [AN220193](https://www.infineon.com/dgdl/?fileId=8ac78c8c7cdc391c017d0d3af52e678e) – GPIO usage setup in TRAVEO&trade; T2G family <br> [AN220224](https://www.infineon.com/dgdl/?fileId=8ac78c8c7cdc391c017d0d3a800a6752) – How to use Timer, Counter, and PWM (TCPWM) in TRAVEO&trade; T2G family <br> [AN220203](https://www.infineon.com/dgdl/?fileId=8ac78c8c7cdc391c017d0d3afcf16792) – Smart I/O usage setup in TRAVEO&trade; T2G family
+Application notes  | [AN235305](https://www.infineon.com/assets/row/public/documents/10/42/infineon-an235305-getting-started-with-traveo-t2g-family-mcus-in-modustoolbox-applicationnotes-en.pdf) – Getting started with TRAVEO&trade; T2G family MCUs in ModusToolbox&trade; <br> [AN220193](https://www.infineon.com/assets/row/public/documents/10/42/infineon-an220118---gpio-usage-setup-in-traveo-t2g-family-applicationnotes-en.pdf) – GPIO usage setup in TRAVEO&trade; T2G family <br> [AN220224](https://www.infineon.com/assets/row/public/documents/10/42/infineon-an220224---how-to-use-timer-counter-and-pwm-tcpwm-in-traveo-t2g-family-applicationnotes-en.pdf) – How to use Timer, Counter, and PWM (TCPWM) in TRAVEO&trade; T2G family <br> [AN220203](https://www.infineon.com/assets/row/public/documents/10/42/infineon-an220203---smart-i-o-usage-setup-in-traveo-t2g-family-applicationnotes-en.pdf) – Smart I/O usage setup in TRAVEO&trade; T2G family
 Code examples  | [Using ModusToolbox&trade;](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
-Device documentation | [TRAVEO&trade; T2G family MCUs datasheets](https://www.infineon.com/cms/en/product/microcontroller/32-bit-traveo-t2g-arm-cortex-microcontroller/32-bit-traveo-t2g-arm-cortex-for-cluster/traveo-t2g-cyt4dn/#!documents) <br> [TRAVEO&trade; T2G family MCUs architecture/registers reference manuals](https://www.infineon.com/cms/en/product/microcontroller/32-bit-traveo-t2g-arm-cortex-microcontroller/32-bit-traveo-t2g-arm-cortex-for-cluster/traveo-t2g-cyt4dn/#!documents) <br /> 
+Device documentation | [TRAVEO&trade; T2G body high family MCUs datasheets](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-body/t2g-cyt4bf/#documents) <br> [TRAVEO&trade; T2G body high family MCUs architecture/registers reference manuals](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-body/t2g-cyt4bf/#documents) <br> [TRAVEO&trade; T2G cluster family MCUs datasheets for CYT4DN](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-cluster/#documents) <br> [TRAVEO&trade; T2G cluster family MCUs architecture/registers reference manuals for CYT4DN](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-cluster/#documents) <br> [TRAVEO&trade; T2G cluster family MCUs datasheets for CYT3DL](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-cluster/#documents) <br> [TRAVEO&trade; T2G cluster family MCUs architecture/registers reference manuals for CYT3DL](https://www.infineon.com/products/microcontroller/32-bit-traveo-t2g-arm-cortex/for-cluster/#documents)　<br>  
 Development kits | Select your kits from the [Evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board).
 Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – Peripheral Driver Library (PDL) 　<br> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port　
 Tools  | [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; software is a collection of easy-to-use libraries and tools enabling rapid development with Infineon MCUs for applications ranging from wireless and cloud-connected systems, edge AI/ML, embedded sense and control, to wired USB connectivity using PSOC&trade; Industrial/IoT MCUs, AIROC&trade; Wi-Fi and Bluetooth&reg; connectivity devices, XMC&trade; Industrial MCUs, and EZ-USB&trade;/EZ-PD&trade; wired connectivity controllers. ModusToolbox&trade; incorporates a comprehensive set of BSPs, HAL, libraries, configuration tools, and provides support for industry-standard IDEs to fast-track your embedded application development.
@@ -298,9 +328,10 @@ Infineon provides a wealth of data at [www.infineon.com](https://www.infineon.co
 
 Document title: *CE240776* – *PDL: TCPWM counter using Smart I/O* 
 
-Version | Description of change
-------- | ---------------------
-1.0.0   | New code example
+| Version | Description of change
+| ------- | ---------------------
+| 1.0.0   | New code example
+| 1.1.0   | Added support for KIT_T2G_C-2D-4M_LITE, KIT_T2G-B-H_EVK and KIT_T2G-B-H_LITE, and updated to support ModusToolbox&trade; v3.6. |
 <br>
 
 
@@ -308,11 +339,11 @@ All referenced product or service names and trademarks are the property of their
 
 The Bluetooth&reg; word mark and logos are registered trademarks owned by Bluetooth SIG, Inc., and any use of such marks by Infineon is under license.
 
+PSOC&trade;, formerly known as PSoC&trade;, is a trademark of Infineon Technologies. Any references to PSoC&trade; in this document or others shall be deemed to refer to PSOC&trade;.
 
 ---------------------------------------------------------
 
-© Cypress Semiconductor Corporation, 2024. This document is the property of Cypress Semiconductor Corporation, an Infineon Technologies company, and its affiliates ("Cypress").  This document, including any software or firmware included or referenced in this document ("Software"), is owned by Cypress under the intellectual property laws and treaties of the United States and other countries worldwide.  Cypress reserves all rights under such laws and treaties and does not, except as specifically stated in this paragraph, grant any license under its patents, copyrights, trademarks, or other intellectual property rights.  If the Software is not accompanied by a license agreement and you do not otherwise have a written agreement with Cypress governing the use of the Software, then Cypress hereby grants you a personal, non-exclusive, nontransferable license (without the right to sublicense) (1) under its copyright rights in the Software (a) for Software provided in source code form, to modify and reproduce the Software solely for use with Cypress hardware products, only internally within your organization, and (b) to distribute the Software in binary code form externally to end users (either directly or indirectly through resellers and distributors), solely for use on Cypress hardware product units, and (2) under those claims of Cypress's patents that are infringed by the Software (as provided by Cypress, unmodified) to make, use, distribute, and import the Software solely for use with Cypress hardware products.  Any other use, reproduction, modification, translation, or compilation of the Software is prohibited.
+(c) 2024-2026, Infineon Technologies AG, or an affiliate of Infineon Technologies AG. All rights reserved.
+This software, associated documentation and materials ("Software") is owned by Infineon Technologies AG or one of its affiliates ("Infineon") and is protected by and subject to worldwide patent protection, worldwide copyright laws, and international treaty provisions. Therefore, you may use this Software only as provided in the license agreement accompanying the software package from which you obtained this Software. If no license agreement applies, then any use, reproduction, modification, translation, or compilation of this Software is prohibited without the express written permission of Infineon.
 <br>
-TO THE EXTENT PERMITTED BY APPLICABLE LAW, CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH REGARD TO THIS DOCUMENT OR ANY SOFTWARE OR ACCOMPANYING HARDWARE, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  No computing device can be absolutely secure.  Therefore, despite security measures implemented in Cypress hardware or software products, Cypress shall have no liability arising out of any security breach, such as unauthorized access to or use of a Cypress product. CYPRESS DOES NOT REPRESENT, WARRANT, OR GUARANTEE THAT CYPRESS PRODUCTS, OR SYSTEMS CREATED USING CYPRESS PRODUCTS, WILL BE FREE FROM CORRUPTION, ATTACK, VIRUSES, INTERFERENCE, HACKING, DATA LOSS OR THEFT, OR OTHER SECURITY INTRUSION (collectively, "Security Breach").  Cypress disclaims any liability relating to any Security Breach, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any Security Breach.  In addition, the products described in these materials may contain design defects or errors known as errata which may cause the product to deviate from published specifications. To the extent permitted by applicable law, Cypress reserves the right to make changes to this document without further notice. Cypress does not assume any liability arising out of the application or use of any product or circuit described in this document. Any information provided in this document, including any sample design information or programming code, is provided only for reference purposes.  It is the responsibility of the user of this document to properly design, program, and test the functionality and safety of any application made of this information and any resulting product.  "High-Risk Device" means any device or system whose failure could cause personal injury, death, or property damage.  Examples of High-Risk Devices are weapons, nuclear installations, surgical implants, and other medical devices.  "Critical Component" means any component of a High-Risk Device whose failure to perform can be reasonably expected to cause, directly or indirectly, the failure of the High-Risk Device, or to affect its safety or effectiveness.  Cypress is not liable, in whole or in part, and you shall and hereby do release Cypress from any claim, damage, or other liability arising from any use of a Cypress product as a Critical Component in a High-Risk Device. You shall indemnify and hold Cypress, including its affiliates, and its directors, officers, employees, agents, distributors, and assigns harmless from and against all claims, costs, damages, and expenses, arising out of any claim, including claims for product liability, personal injury or death, or property damage arising from any use of a Cypress product as a Critical Component in a High-Risk Device. Cypress products are not intended or authorized for use as a Critical Component in any High-Risk Device except to the limited extent that (i) Cypress's published data sheet for the product explicitly states Cypress has qualified the product for use in a specific High-Risk Device, or (ii) Cypress has given you advance written authorization to use the product as a Critical Component in the specific High-Risk Device and you have signed a separate indemnification agreement.
-<br>
-Cypress, the Cypress logo, and combinations thereof, ModusToolbox, PSoC, CAPSENSE, EZ-USB, F-RAM, and TRAVEO are trademarks or registered trademarks of Cypress or a subsidiary of Cypress in the United States or in other countries. For a more complete list of Cypress trademarks, visit www.infineon.com. Other names and brands may be claimed as property of their respective owners.
+Disclaimer: UNLESS OTHERWISE EXPRESSLY AGREED WITH INFINEON, THIS SOFTWARE IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ALL WARRANTIES OF NON-INFRINGEMENT OF THIRD-PARTY RIGHTS AND IMPLIED WARRANTIES SUCH AS WARRANTIES OF FITNESS FOR A SPECIFIC USE/PURPOSE OR MERCHANTABILITY. Infineon reserves the right to make changes to the Software without notice. You are responsible for properly designing, programming, and testing the functionality and safety of your intended application of the Software, as well as complying with any legal requirements related to its use. Infineon does not guarantee that the Software will be free from intrusion, data theft or loss, or other breaches (“Security Breaches”), and Infineon shall have no liability arising out of any Security Breaches. Unless otherwise explicitly approved by Infineon, the Software may not be used in any application where a failure of the Product or any consequences of the use thereof can reasonably be expected to result in personal injury.
